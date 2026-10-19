@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f5f7ff" />
+  <title>MindMetric | Mental Wellbeing Predictor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="page-glow glow-one"></div>
+  <div class="page-glow glow-two"></div>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="MindMetric home">
+      <span class="brand-mark">✳</span><span>mind<span class="brand-light">metric</span></span>
+    </a>
+    <span class="top-note"><span class="status-dot"></span> Personal insight tool</span>
+  </header>
+
+  <main class="shell">
+    <section class="hero">
+      <div class="eyebrow"><span class="eyebrow-line"></span> YOUR DIGITAL WELLBEING, IN FOCUS</div>
+      <h1>Understand your<br><span>digital balance.</span></h1>
+      <p class="hero-copy">Share a little about your daily habits and get a model-generated mental health score in seconds.</p>
+      <div class="trust-row">
+        <span><span class="tiny-check">✓</span> Simple and private</span>
+        <span><span class="tiny-check">✓</span> Instant prediction</span>
+        <span><span class="tiny-check">✓</span> Easy to understand</span>
+      </div>
+    </section>
+
+    <div class="content-grid">
+      <section class="form-card">
+        <div class="card-heading">
+          <div>
+            <div class="step-label">YOUR PROFILE</div>
+            <h2>Let's get to know you</h2>
+            <p>Fill in each field to generate your prediction.</p>
+          </div>
+          <div class="heading-icon" aria-hidden="true">☼</div>
+        </div>
+
+        <form id="prediction-form">
+          <div class="section-title"><span class="section-number">01</span><span>About you</span><span class="section-rule"></span></div>
+          <div class="form-grid">
+            <label class="field"><span>Age <b>*</b></span><input name="Age" type="number" min="1" max="119" placeholder="e.g. 21" required /></label>
+            <label class="field"><span>Gender <b>*</b></span><select name="Gender" required><option value="" disabled selected>Select gender</option><option>male</option><option>female</option><option>other</option></select></label>
+            <label class="field"><span>Country <b>*</b></span><input name="Country" type="text" list="country-options" placeholder="e.g. India" required /><datalist id="country-options"><option value="India"><option value="USA"><option value="Canada"><option value="Australia"><option value="UK"><option value="Germany"><option value="Mexico"><option value="Turkey"><option value="France"></datalist></label>
+            <label class="field"><span>Academic level <b>*</b></span><select name="Academic_Level" required><option value="" disabled selected>Select level</option><option>Undergraduate</option><option>Graduate</option><option>High School</option></select></label>
+          </div>
+
+          <div class="section-title section-spaced"><span class="section-number">02</span><span>Digital habits</span><span class="section-rule"></span></div>
+          <div class="form-grid">
+            <label class="field"><span>Most-used platform <b>*</b></span><select name="Most_Used_Platform" required><option value="" disabled selected>Choose a platform</option><option>Facebook</option><option>LinkedIn</option><option>Instagram</option><option>Snapchat</option><option>Twitter</option><option>YouTube</option><option>TikTok</option><option>LINE</option><option>KakaoTalk</option><option>VKontakte</option><option>WhatsApp</option><option>WeChat</option></select></label>
+            <label class="field"><span>Main purpose <b>*</b></span><select name="Purpose_Of_Use" required><option value="" disabled selected>Choose a purpose</option><option>Networking</option><option>Education</option><option>Entertainment</option><option>News</option></select></label>
+            <label class="field"><span>Daily usage (hours) <b>*</b></span><input name="Avg_Daily_Usage_Hours" type="number" min="0.1" max="23.9" step="0.1" placeholder="e.g. 4.5" required /></label>
+            <label class="field"><span>Daily phone unlocks <b>*</b></span><input name="Daily_Unlocks" type="number" min="0" step="1" placeholder="e.g. 45" required /></label>
+          </div>
+
+          <div class="section-title section-spaced"><span class="section-number">03</span><span>Daily routine</span><span class="section-rule"></span></div>
+          <div class="form-grid">
+            <label class="field"><span>Study hours per day <b>*</b></span><input name="Study_Hours" type="number" min="0.1" max="23.9" step="0.1" placeholder="e.g. 5" required /></label>
+            <label class="field"><span>Physical activity (hours) <b>*</b></span><input name="Physical_Activity_Hours" type="number" min="0.1" max="23.9" step="0.1" placeholder="e.g. 1" required /></label>
+            <label class="field"><span>Sleep per night (hours) <b>*</b></span><input name="Sleep_Hours_Per_Night" type="number" min="0.1" max="23.9" step="0.1" placeholder="e.g. 7.5" required /></label>
+            <label class="field"><span>Current stress level <b>*</b></span><select name="Stress_Level" required><option value="" disabled selected>Select stress level</option><option>Low</option><option>Medium</option><option>High</option><option>Very High</option></select></label>
+          </div>
+
+          <div class="form-error" id="form-error" role="alert" hidden></div>
+          <button class="submit-button" id="submit-button" type="submit">
+            <span class="button-label">Generate my score <span aria-hidden="true">↗</span></span>
+            <span class="button-spinner" aria-hidden="true"></span>
+          </button>
+          <p class="form-footnote"><span aria-hidden="true">⌑</span> Your answers are sent to your local API at 127.0.0.1:8000.</p>
+        </form>
+      </section>
+
+      <aside class="result-column">
+        <section class="result-card" id="result-card" aria-live="polite">
+          <div class="result-topline"><span class="result-icon">✦</span><span>YOUR RESULT</span><span class="result-badge" id="result-badge">AWAITING INPUT</span></div>
+          <div id="empty-result" class="empty-result">
+            <div class="result-orbit"><div class="orbit-core">✳</div><span class="orbit-dot dot-a"></span><span class="orbit-dot dot-b"></span><span class="orbit-dot dot-c"></span></div>
+            <h2>Your insight<br>starts here.</h2>
+            <p>Complete the questionnaire and your predicted score will appear here.</p>
+            <div class="mini-stat-row"><div><span class="mini-stat-icon">◷</span><span>Daily habits</span></div><div><span class="mini-stat-icon">⌁</span><span>Model insight</span></div></div>
+          </div>
+          <div id="loading-result" class="loading-result" hidden>
+            <div class="loader-ring"></div><h3>Reading your patterns</h3><p>Sending your answers to the prediction model…</p>
+            <div class="loading-track"><span></span></div>
+          </div>
+          <div id="success-result" class="success-result" hidden>
+            <p class="score-caption">PREDICTED MENTAL HEALTH SCORE</p>
+            <div class="score-value"><span id="score-value">—</span><span class="score-unit">/ model output</span></div>
+            <div class="score-divider"></div>
+            <div class="result-message"><span class="message-spark">✦</span><div><h3>Prediction complete</h3><p>This is the score returned by your machine-learning model, not a clinical assessment.</p></div></div>
+            <button type="button" class="secondary-button" id="edit-answers">Edit answers <span>↗</span></button>
+          </div>
+          <div id="error-result" class="error-result" hidden>
+            <div class="error-symbol">!</div><h3>We couldn't get a prediction</h3><p id="error-message">Please check the API and try again.</p>
+            <button type="button" class="secondary-button" id="try-again">Try again <span>↻</span></button>
+          </div>
+        </section>
+        <section class="note-card"><div class="note-icon">♡</div><div><h3>A gentle reminder</h3><p>This tool is for educational insight only. A score cannot diagnose or replace advice from a qualified mental health professional.</p></div></section>
+        <div class="api-note"><span class="api-pulse"></span><span>API endpoint</span><code>POST /predict</code></div>
+      </aside>
+    </div>
+    <footer><span>mindmetric <span class="footer-dot">•</span> Digital wellbeing insights</span><span>Built for self-reflection, not diagnosis.</span></footer>
+  </main>
+</body>
+</html>
